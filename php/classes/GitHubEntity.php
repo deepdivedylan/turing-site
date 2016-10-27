@@ -286,8 +286,17 @@ class GitHubEntity implements \JsonSerializable {
 	* @return array resulting state variables to serialize
 	**/
 	public function jsonSerialize() : array {
+		$matches = [];
+		$regex = "/^https:\/\/api\.github\.com\/repos\/([\w-]+)\/([\w-]+)\/git\/blobs\/[\da-f]{40}$/";
+		preg_match($regex, $this->url, $matches);
+
 		$fields = [];
 		$fields["depth"] = $this->getDirectoryDepth();
+		if($this->isDirectory() === false) {
+			$fields["downloadUrl"] = "https://raw.githubusercontent.com/" . $matches[1] . "/" . $matches[2] . "/master/" . $this->path;
+		} else {
+			$fields["downloadUrl"] = null;
+		}
 		$fields = array_merge($fields, get_object_vars($this));
 		return($fields);
 	}
