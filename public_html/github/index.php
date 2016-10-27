@@ -15,6 +15,13 @@
 	<body>
 		<main class="container" ng-controller="GitHubBrowserController">
 			<h1>GitHub Browser</h1>
+			<p>
+				Repository: {{ repository }}<br />
+				Username: {{ username }}
+			</p>
+			<ul ng-repeat="file in files">
+				<li ng-if="file.type === 'blob'"><a ng-href="{{ file.downloadUrl }}">{{ file.path }}</a></li>
+			</ul>
 		</main>
 	</body>
 </html>
