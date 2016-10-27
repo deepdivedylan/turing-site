@@ -9,6 +9,7 @@
 
 		<script type="text/javascript" src="github-browser.js"></script>
 		<script type="text/javascript" src="github-browser-service.js"></script>
+		<script type="text/javascript" src="github-browser-controller.js"></script>
 		<title>GitHub Browser</title>
 	</head>
 	<body>
