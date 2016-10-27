@@ -281,20 +281,6 @@ class GitHubEntity implements \JsonSerializable {
 	}
 
 	/**
-	 * comparison method for two GitHubEntities
-	 *
-	 * @param GitHubEntity $otherEntity entity to compare to
-	 * @return int negative, zero, or positive if less than, equal to, or greater than the other entity
-	 **/
-	public function compareTo(GitHubEntity $otherEntity) {
-		if($this->getDirectoryDepth() !== $otherEntity->getDirectoryDepth()) {
-			return($this->getDirectoryDepth() - $otherEntity->getDirectoryDepth());
-		} else {
-			return(strcmp($this->path, $otherEntity->getPath()));
-		}
-	}
-
-	/**
 	 * formats the state variables for JSON serialization
 	 *
 	 * @return array resulting state variables to serialize
@@ -304,5 +290,19 @@ class GitHubEntity implements \JsonSerializable {
 		$fields["depth"] = $this->getDirectoryDepth();
 		$fields = array_merge($fields, get_object_vars($this));
 		return($fields);
+	}
+
+	/**
+	 * comparison method for two GitHubEntities
+	 *
+	 * @param GitHubEntity $otherEntity entity to compare to
+	 * @return int negative, zero, or positive if less than, equal to, or greater than the other entity
+	 **/
+	public static function compareTo(GitHubEntity $thisEntity,GitHubEntity $thatEntity) {
+		if($thisEntity->getDirectoryDepth() !== $thatEntity->getDirectoryDepth()) {
+			return($thisEntity->getDirectoryDepth() - $thatEntity->getDirectoryDepth());
+		} else {
+			return(strcmp($thisEntity->getPath(), $thatEntity->getPath()));
+		}
 	}
 }

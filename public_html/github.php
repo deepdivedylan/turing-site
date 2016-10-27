@@ -22,4 +22,5 @@ $gitHubEntities = [];
 foreach($repositoryTree as $entity) {
 	$gitHubEntities[] = new GitHubEntity($entity);
 }
+usort($gitHubEntities, ["Edu\\Cnm\\GitHubBrowser\\GitHubEntity", "compareTo"]);
 var_dump($gitHubEntities);
