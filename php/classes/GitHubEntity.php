@@ -286,6 +286,9 @@ class GitHubEntity implements \JsonSerializable {
 	 * @return array resulting state variables to serialize
 	 **/
 	public function jsonSerialize() {
-		return(get_object_vars($this));
+		$fields = [];
+		$fields["depth"] = $this->getDirectoryDepth();
+		$fields = array_merge($fields, get_object_vars($this));
+		return($fields);
 	}
 }
