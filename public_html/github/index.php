@@ -13,7 +13,7 @@
 		<title>GitHub Browser</title>
 	</head>
 	<body>
-		<main class="container">
+		<main class="container" ng-controller="GitHubBrowserController">
 			<h1>GitHub Browser</h1>
 		</main>
 	</body>
