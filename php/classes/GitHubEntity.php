@@ -45,7 +45,7 @@ class GitHubEntity implements \JsonSerializable {
 	 * constructor for this entity
 	 *
 	 * the parameters may be passed as one of two formats:
-	 * - array: ["path" => $newPath, "mode" => $newMode, "sha" => $newSha, "size" => $newSize, "type" => $newType, "url" => $newUrl]
+	 * - object: {"path" : $newPath, "mode" : $newMode, "sha" : $newSha, "size" : $newSize, "type" : $newType, "url" : $newUrl}
 	 * - parameters one at time, mirroring the array above
 	 * if the parameters are not passed in either format, a BadMethodCallException is thrown
 	 *
@@ -57,12 +57,13 @@ class GitHubEntity implements \JsonSerializable {
 		$parameters = ["path", "mode", "sha", "size", "type", "url"];
 		$numArgs = func_num_args();
 		if($numArgs === 1) {
-			$argv = func_get_arg(0);
-			if(gettype($argv) !== "array") {
-				throw(new \BadMethodCallException("single argument must be an array"));
+			$object = func_get_arg(0);
+			if(gettype($object) !== "object") {
+				throw(new \BadMethodCallException("single argument must be an object"));
 			}
-			foreach($argv as $arg => $value) {
-				${"new" .  ucfirst($arg)} = $value;
+			$stateVariables = get_object_vars($object);
+			foreach($stateVariables as $stateVariable => $value) {
+				${"new" .  ucfirst($stateVariable)} = $value;
 			}
 		} else if($numArgs === 6) {
 			foreach($parameters as $index => $parameter) {
@@ -134,7 +135,7 @@ class GitHubEntity implements \JsonSerializable {
 			$this->mode = $newMode;
 		} else if (gettype($newMode) === "string") {
 			$newMode = octdec($newMode);
-			if($newMode === 0) {
+			if($newMode !== 0) {
 				$this->mode = $newMode;
 			} else {
 				throw(new \InvalidArgumentException("invalid mode"));

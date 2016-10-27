@@ -16,5 +16,5 @@ $sha = $repositoryBase->commit->sha;
 
 $reply = $guzzle->get("git/trees/$sha?recursive=1");
 $json = (string)$reply->getBody();
-$repositoryTree = json_decode($json);
-var_dump($repositoryTree);
+$repository = json_decode($json);
+var_dump($repository);
