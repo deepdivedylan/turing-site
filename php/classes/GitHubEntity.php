@@ -72,6 +72,7 @@ class GitHubEntity implements \JsonSerializable {
 		} else {
 			throw(new \BadMethodCallException("invalid number of parameters to constructor"));
 		}
+		$newSize = $newSize ?? null;
 
 		try {
 			$this->setPath($newPath);
@@ -187,7 +188,12 @@ class GitHubEntity implements \JsonSerializable {
 	 * @param string $newSize new value of size
 	 * @throws \RangeException if size is invalid
 	 **/
-	public function setSize(int $newSize) {
+	public function setSize(int $newSize = null) {
+		if($newSize === null) {
+			$this->size = null;
+			return;
+		}
+
 		if($newSize < 0) {
 			throw(new \RangeException("invalid size"));
 		}
