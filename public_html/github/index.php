@@ -8,6 +8,7 @@
 		<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
 
 		<script type="text/javascript" src="github-browser.js"></script>
+		<script type="text/javascript" src="github-browser-service.js"></script>
 		<title>GitHub Browser</title>
 	</head>
 	<body>
