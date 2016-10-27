@@ -43,7 +43,7 @@ try {
 		foreach($repositoryTree as $entity) {
 			$gitHubEntities[] = new GitHubEntity($entity);
 		}
-		usort($gitHubEntities, ["Edu\\Cnm\\GitHubBrowser\\GitHubEntity", "compareTo"]);
+		// usort($gitHubEntities, ["Edu\\Cnm\\GitHubBrowser\\GitHubEntity", "compareTo"]);
 		$reply->data = $gitHubEntities;
 	} else {
 		throw (new InvalidArgumentException("Invalid HTTP method request"));
