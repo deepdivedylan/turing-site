@@ -20,7 +20,7 @@
 				Username: {{ username }}
 			</p>
 			<ul ng-repeat="file in files">
-				<li ng-if="file.type === 'blob'"><a ng-href="{{ file.downloadUrl }}">{{ file.path }}</a></li>
+				<li ng-if="file.type === 'blob'"><a ng-click="getFile(file.path, file.downloadUrl);">{{ file.path }}</a></li>
 			</ul>
 		</main>
 	</body>
