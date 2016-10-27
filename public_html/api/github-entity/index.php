@@ -17,7 +17,7 @@ try {
 	$username = filter_input(INPUT_GET, "username", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 
 	if(empty($repository) === true) {
-		throw(new Rangular2-dicewareuntimeException("invalid repository", 400));
+		throw(new RuntimeException("invalid repository", 400));
 	}
 	if(empty($username) === true) {
 		throw(new RuntimeException("invalid username", 400));
