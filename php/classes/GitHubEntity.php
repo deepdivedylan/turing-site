@@ -91,6 +91,33 @@ class GitHubEntity implements \JsonSerializable {
 	}
 
 	/**
+	 * evalulates whether this is a directory
+	 *
+	 * @return bool true if a directory, false if not
+	 **/
+	public function isDirectory() {
+		return($this->type === "tree");
+	}
+
+	/**
+	 * evalulates whether this is a file
+	 *
+	 * @return bool true if a file, false if not
+	 **/
+	public function isFile() {
+		return($this->type === "blob");
+	}
+
+	/**
+	 * calculates and returns the directory depth
+	 *
+	 * @return int directory depth
+	 **/
+	public function getDirectoryDepth() : int {
+		return(substr_count($this->path, "/"));
+	}
+
+	/**
 	 * accessor method for path
 	 *
 	 * @return string current value of path

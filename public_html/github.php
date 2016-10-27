@@ -17,9 +17,9 @@ $sha = $repositoryBase->commit->sha;
 $reply = $guzzle->get("git/trees/$sha?recursive=1");
 $json = (string)$reply->getBody();
 $repositoryTree = json_decode($json)->tree;
-var_dump($repositoryTree);
 
 $gitHubEntities = [];
 foreach($repositoryTree as $entity) {
 	$gitHubEntities[] = new GitHubEntity($entity);
 }
+var_dump($gitHubEntities);
