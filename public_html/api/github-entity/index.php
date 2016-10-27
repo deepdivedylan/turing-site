@@ -13,7 +13,18 @@ try {
 	//determine which HTTP method was used
 	$method = array_key_exists("HTTP_X_HTTP_METHOD", $_SERVER) ? $_SERVER["HTTP_X_HTTP_METHOD"] : $_SERVER["REQUEST_METHOD"];
 
-	$guzzle = new Client(["base_uri" => "https://api.github.com/repos/dylan-mcdonald/angular2-diceware/"]);
+	// sanitize inputs
+	$repository = filter_input(INPUT_GET, "repository", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+	$username = filter_input(INPUT_GET, "username", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+
+	if(empty($repository) === true) {
+		throw(new RuntimeException("invalid repository", 400));
+	}
+	if(empty($username) === true) {
+		throw(new RuntimeException("invalid username", 400));
+	}
+
+	$guzzle = new Client(["base_uri" => "https://api.github.com/repos/$username/$repository/"]);
 	$reply = $guzzle->get("branches/master");
 	if($reply->getStatusCode() < 200 || $reply->getStatusCode() >= 300) {
 		throw(new GitHubBrowserException("unable to contact github: " . $reply->getReasonPhrase(), $reply->getStatusCode()));
