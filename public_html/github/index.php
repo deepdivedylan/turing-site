@@ -22,6 +22,10 @@
 			<ul ng-repeat="file in files">
 				<li ng-if="file.type === 'blob'"><a ng-click="getFile(file.path, file.downloadUrl);">{{ file.path }}</a></li>
 			</ul>
+			<div>
+				<h3>File: <em>{{ currentFilename }}</h3>
+				<pre>{{ currentFileContent }}</pre>
+			</div>
 		</main>
 	</body>
 </html>

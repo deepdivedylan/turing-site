@@ -8,9 +8,9 @@ app.controller("GitHubBrowserController", ["$scope", "GitHubBrowserService", fun
 	$scope.getFile = function(filename, url) {
 		GitHubBrowserService.fetchUrl(url)
 		.then(function(result) {
-			if(result.data.status === 200) {
+			if(result.status === 200) {
 				$scope.currentFilename = filename;
-				$scope.currentFileContent = result.data.data;
+				$scope.currentFileContent = result.data;
 			}
 		});
 	};
